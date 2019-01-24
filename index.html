@@ -2,9 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<title>深度自然计算器</title>
-		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<style>
 			*{
 				margin: 0;
@@ -24,354 +23,356 @@
 				content: '';
 				clear: both;
 			}
-			body{
-				background-color: #46ffbb;
+			.calulator{
+				position: relative;
+				/*width: 414px;*/
+				width: 100%;
+				height: 100%;
+				margin: 0 auto;
 			}
-			.wrap{
-				/*background-color: #fff;*/
-				background-color: #fff65d;
+			.calulator .header{
+			  	display:flex;
+			  	height: 20%;
+			  	align-items:center;/*垂直居中*/
+			  	justify-content: center;/*水平居中*/				
+				background-color: #ff5521;
 			}
-			.wrap .header{
-				text-align: center;
-/*				background-color: #ff5521;*/
-				background-color: #fff65d;
-			}
-			.wrap .header h1{
+			.calulator .header h1{
+				display: block;
+				width: 100%;
 				font-size: 24px;
 				line-height: 64px;
 				color: #fff;
+				flex-shrink:0;
 			}
-			.wrap .header span{
+			.calulator .header span{
 				display: block;
+				width: 100%;
 				font-size: 14px;
+				text-align: center;
 				line-height: 32px;
 				color: #fff;
+				flex-shrink:0;
 			}
-			.wrap .header img{
+			.calulator .calculation_result{
+				position: absolute;
+				left: 0;
+				bottom: 1%;
+				width: 100%;
+				height: 26%;
+				padding: 0 5%;
+			}	
+			.calulator .calculation_result .result{
 				width: 100%;
 				height: 100%;
-			}
-			.wrap .calculator{
-				/*background-color: #fff;*/
-				background-color: #fff65d;
-			}
-			.wrap .calculator .calculator_item{
-				padding: 0 15px;
+				padding: 6% 0;
+				text-align: center;
+				background-color: #ececec;
+			}	
+			.calulator .calculation_result .result h2{
+				display: block;
 				font-size: 16px;
-				line-height: 64px;
-				border-bottom: 1px solid #e0dbdf;
+				line-height: 32px;
+				color: #666;				
+			}	
+			.calulator .calculation_result .result em{
+				display: block;
+				font-size: 36px;
+				font-weight: 600;
+				font-style: normal;
+				line-height: 32px;
+				color: #ff5521;				
+			}
+			.calulator .calculation_result .result span{
+				display: block;
+				font-size: 16px;
+				line-height: 32px;				
+			}	
+			.calulator .calculation_result .result img{
+				height: 20px;
+			}
+			.calulator .calculation_result .result a{
+				display: block;
+				width: 50%;
+				margin: 0 auto;
+				font-size: 18px;
+				font-weight: bold;
+				line-height: 18px;	
+				text-decoration: none;
+				color: #ff5521;
+				color: #d85036;
+				/*color: #333;*/
+				/*color: #aaa13e;*/
+			}	
+			.calulator .calulator_item_wrap{
+				position: absolute;
+				left: 0;
+				top: 20%;
+				width: 100%;
+				height: 50%;
+			}
+			.calulator .calulator_item_wrap .calculator_item{
+				position: relative;
+				width: 100%;
+				height: 20%;
+				padding: 0 5%;
+				border-bottom: 1px solid #d7d7d7;
+			}
+			.calulator .calulator_item_wrap .calculator_item label{
+				height: 100%;
 				
 			}
-			.wrap .calculator .calculator_item input[type="text"]{
-				width: 30%;
-				height: 64px;
-				padding: 0 5px;
+			.calulator .calulator_item_wrap .calculator_item input[type="button"]{
+				height: 100%;
 				border: 0;
-				font-size: 16px;
+				font-size: 18px;
+				background-color: #fff;
+				outline: none;
+				-webkit-appearance: none;
+			}
+			.calulator .calulator_item_wrap .calculator_item input[type="text"]{
+				width: 55%;
+				height: 100%;
+				border: 0;
 				text-align: right;
 				outline: none;
-				background-color: #fff65d;
 			}
-			.wrap .calculator .calculation_btn_wrap{
-				padding: 20px 0;
-				text-align: center;
-			}
-			.wrap .calculator strong{
+			
+			.calulator .calulator_item_wrap .calculator_item .person_num_info_text{
+				
+				display: flex;
+				align-items:center;/*垂直居中*/
+			  	justify-content: center;/*水平居中*/	
 				display: none;
-				font-size: 16px;
-				font-weight: normal;
-				text-align: center;
-				line-height: 32px;
-				color: #2159b8;
+				position: fixed;
+				left: 0;
+				top: 0;
+				z-index: 999;
+				width: 100%;
+				height: 100%;
+				background: rgba(0,0,0,0.2);
+				
 			}
-			.wrap .calculator .calculation_btn_wrap .calculation_btn{
+			.calulator_item_wrap .calculator_item .person_num_info_text .text{
+				width: 90%;
+				height: 300;
+				background-color: #fff;
+			}
+			.calulator_item_wrap .calculator_item .person_num_info_text .text img{
+				width: 100%;
+				height: 200px;
+			}
+			.calulator_item_wrap .calculator_item .person_num_info_text .text #close{
+				display: block;
+				width: 50%;
+				height: 30px;
+				margin: 0 auto;
+				font-size: 18px;
+				color: #ff5521;
+			}
+			
+			
+			.calulator .calulator_item_wrap .error{
+				display: none;
+				/*display: block;*/
+				width: 100%;
+				height: 20%;
+				border: 0;
+				color: #2159b8;
+				background-color: #fff;
+				outline: none;
+			}
+			.calulator .calulator_item_wrap .calulator_btn{
+				display: block;
 				width: 90%;
 				height: 30px;
+				margin: 8% auto;
 				border: 0;
 				border-radius: 10px;
 				color: #fff;
 				background-color: #ff5521;
 				outline: none;
-				cursor: pointer;
 				-webkit-appearance: none;
 			}
-			.wrap .calculator .calculation_btn_wrap .calculation_btn:hover{
+			.calulator .calulator_item_wrap .calulator_btn:hover{
 				background-color: #e54919;
 			}
-			.wrap .calculator .calculation_result{
-				/*width: 90%;*/
-				width: 100%;
-				height: 220px;
-				padding: 52px 0 52px 0;
-				margin: 0 auto;
-				text-align: center;
-				/*background-color: #ececec;*/
-				background: url(./imgs/bottom.jpg) 0 0 no-repeat;
-				background-size: 100% 100%;
-			}
-			.wrap .calculator .calculation_result label{
-				display: block;
-				font-size: 16px;
-				line-height: 32px;
-				/*color: #666;*/
-				color: #fff000;
-			}
-			.wrap .calculator .calculation_result span{
-				display: block;
-				font-size: 16px;
-				line-height: 32px;
-			}
-			.wrap .calculator .calculation_result span:nth-child(1){
-				font-size: 32px;
+			.calulator .calulator_item_wrap .calculator_item .info{
+				position: absolute;
+				left: 5%;
+				bottom: 0;
+				font-size: 10px;
 				font-weight: 600;
-				/*color: #ff5521;*/	
-				color: #fff;
+				line-height: 24px;
+				text-decoration: none;
+				color: #999;
 			}
-			@media screen and (max-width: 1025px) {
-				.wrap .header h1{ font-size: 48px; line-height: 128px}
-				.wrap .header span{ font-size: 28px; line-height: 64px;}
-				.wrap .calculator .calculator_item{ font-size:32px; line-height: 128px; }
-				.wrap .calculator .calculator_item input[type="text"]{ height: 128px; font-size: 32px; line-height: 128px;}
-				.wrap .calculator strong{ font-size: 32px; line-height: 64px; }
-				.wrap .calculator .calculation_btn_wrap{ padding: 40px 0; }
-				.wrap .calculator .calculation_btn_wrap .calculation_btn{ font-size: 32px; height: 60px; }
-				.wrap .calculator .calculation_result{ height: 400px; padding: 21% 0 0 0; }
-				.wrap .calculator .calculation_result label{ font-size: 32px; line-height: 64px; }
-				.wrap .calculator .calculation_result span{ font-size: 32px; line-height: 64px; }
-				.wrap .calculator .calculation_result span:nth-child(2){ font-size: 64px; line-height: 64px; }
-			}	
-			@media screen and (max-width: 769px) {
-				.wrap .header h1{ font-size: 36px; line-height: 96px}
-				.wrap .header span{ font-size: 21px; line-height: 48px;}
-				.wrap .calculator .calculator_item{ font-size:24px; line-height: 96px; }
-				.wrap .calculator .calculator_item input[type="text"]{ height: 96px; font-size: 24px; line-height: 96px;}
-				.wrap .calculator strong{ font-size: 24px; line-height: 48px; }
-				.wrap .calculator .calculation_btn_wrap{ padding: 30px 0; }
-				.wrap .calculator .calculation_btn_wrap .calculation_btn{ font-size: 24px; height: 45px; }
-				.wrap .calculator .calculation_result{ height: 300px; padding: 21% 0 0 0; }
-				.wrap .calculator .calculation_result label{ font-size: 24px; line-height: 48px; }
-				.wrap .calculator .calculation_result span{ font-size: 24px; line-height: 48px; }
-				.wrap .calculator .calculation_result span:nth-child(1){ font-size: 48px; line-height: 48px; }
+			#goToShoppingMall{
+				animation:mymove 1.5s infinite;
 			}
-			@media screen and (max-width: 415px) {
-				.wrap .header h1{ font-size: 24px; line-height: 64px}
-				.wrap .header span{ font-size: 14px; line-height: 32px;}
-				.wrap .calculator .calculator_item{ font-size: 16px; line-height: 64px; }
-				.wrap .calculator .calculator_item input[type="text"]{ height: 64px; font-size: 16px; line-height: 64px;}
-				.wrap .calculator strong{ font-size: 16px; line-height: 32px; }
-				.wrap .calculator .calculation_btn_wrap{ padding: 20px 0; }
-				.wrap .calculator .calculation_btn_wrap .calculation_btn{ font-size: 16px; height: 30px; }
-				.wrap .calculator .calculation_result{ height: 200px; padding: 21% 0 0 0; }
-				.wrap .calculator .calculation_result label{ font-size: 16px; line-height: 32px; }
-				.wrap .calculator .calculation_result span{ font-size: 16px; line-height: 32px; }
-				.wrap .calculator .calculation_result span:nth-child(1){ font-size: 32px; line-height: 32px; }
-			}				
-			@media screen and (max-width: 376px) {
-				.wrap .header h1{ font-size: 36px; line-height: 80px}
-				.wrap .header span{ font-size: 18px; line-height: 32px;}
-				.wrap .calculator .calculator_item{ font-size:24px; line-height: 96px; }
-				.wrap .calculator .calculator_item input[type="text"]{ height: 96px; font-size: 24px; line-height: 96px;}
-				.wrap .calculator strong{ font-size: 24px; line-height: 48px; }
-				.wrap .calculator .calculation_btn_wrap{ padding: 30px 0; }
-				.wrap .calculator .calculation_btn_wrap .calculation_btn{ font-size: 24px; height: 45px; }
-				.wrap .calculator .calculation_result{ height: 150px;  padding: 18% 0 0 0; }
-				.wrap .calculator .calculation_result label{ font-size: 16px; line-height: 24px; }
-				.wrap .calculator .calculation_result span{ font-size: 24px; line-height: 48px; }
-				.wrap .calculator .calculation_result span:nth-child(1){ font-size: 24px; line-height: 24px; }
-			}								
+			@keyframes mymove
+			{
+				from{transform: scale(1.0);}
+				to{transform: scale(1.5);}
+			}		
 			@media screen and (max-width: 361px) {
-				.wrap .header h1{ font-size: 24px; line-height: 64px}
-				.wrap .header span{ font-size: 14px; line-height: 32px;}
-				.wrap .calculator .calculator_item{ font-size: 16px; line-height: 64px; }
-				.wrap .calculator .calculator_item input[type="text"]{ height: 64px; font-size: 16px; line-height: 64px;}
-				.wrap .calculator strong{ font-size: 16px; line-height: 32px; }
-				.wrap .calculator .calculation_btn_wrap{ padding: 20px 0; }
-				.wrap .calculator .calculation_btn_wrap .calculation_btn{ font-size: 16px; height: 30px; }
-				.wrap .calculator .calculation_result{ height: 200px; padding: 52px 0 0 0; }
-				.wrap .calculator .calculation_result label{ font-size: 16px; line-height: 32px; }
-				.wrap .calculator .calculation_result span{ font-size: 16px; line-height: 32px; }
-				.wrap .calculator .calculation_result span:nth-child(1){ font-size: 32px; line-height: 32px; }
-			}					
-			@media screen and (max-width: 321px) {
-				.wrap .header h1{ font-size: 19px; line-height: 51px}
-				.wrap .header span{ font-size: 11px; line-height: 26px;}
-				.wrap .calculator .calculator_item{ font-size: 13px; line-height: 51px; }
-				.wrap .calculator .calculator_item input[type="text"]{ height: 51px; font-size: 13px; line-height: 51px;}
-				.wrap .calculator strong{ font-size: 13px; line-height: 26px; }
-				.wrap .calculator .calculation_btn_wrap{ padding: 16px 0; }
-				.wrap .calculator .calculation_btn_wrap .calculation_btn{ font-size: 12px; line-height: 24px; }
-				.wrap .calculator .calculation_result{ height: 120px; padding: 21px 0 0 0; }
-				.wrap .calculator .calculation_result label{ font-size: 13px; line-height: 26px; }
-				.wrap .calculator .calculation_result span{ font-size: 13px; line-height: 26px; }
-				.wrap .calculator .calculation_result span:nth-child(1){ font-size: 26px; line-height: 26px; }
+				.calulator .calulator_item_wrap .calculator_item input[type="button"]{
+					font-size: 14px;
+				}
+				.calulator .calulator_item_wrap .calculator_item .info{
+					line-height: 14px;
+				}
 			}
-		
+			@media screen and (max-width: 321px) {
+				.calulator .calulator_item_wrap .calculator_item input[type="button"]{
+					font-size: 14px;
+				}
+				.calulator .calulator_item_wrap .calculator_item .info{
+					line-height: 14px;
+				}
+				.calulator .calculation_result .result{
+					padding: 5% 0;
+				}
+				.calulator .calculation_result .result h2{
+					font-size: 14px;
+					line-height: 28px;
+				}
+				.calulator .calculation_result .result em{
+					font-size: 28px;
+					line-height: 28px;
+				}
+				.calulator .calculation_result .result span{
+					font-size: 14px;
+					line-height: 28px;
+				}
+				.calulator .calculation_result .result a{
+					font-size: 14px;
+					line-height: 14px;
+				}
+			}						
 		</style>
 	</head>
 	<body>
-		<div class="wrap">
-			<div class="header" id="header">
-				<!--<h1>深度自然计算器</h1>
-				<span>快来看看您的收入吧！</span>-->
-				<img src="./imgs/top.jpg" alt="" />
+		<div class="calulator" id="calulator">
+			<div class="header">
+				<div>
+					<h1>深度自然计算器</h1>
+					<span>快来看看您的收入吧！</span>					
+				</div>
 			</div>
-			<div class="calculator">
+			
+			<div class="calulator_item_wrap">
 				<div class="clearfix calculator_item">
-					<label class="fl" for="">发展人数</label>
-					<label class="fr">人</label>
-					<input class="fr input_box" id="person_num" type="text" placeholder="10" value="10"/>
+					<input class="fl" type="button" value="发展人数"/>
+					<input class="fr" type="button" value="人"/>
+					<input class="fr input_box" id="person_num" type="text" value="10"/>
+					<a class="info" id="toSeeWhatPersonNum" href="javascript:;" style="color: #ff5521">点击查看什么是发展人数？</a>
+					
+					<div class="person_num_info_text" id="personNumInfoText">
+						<div class="text">
+							<img src="imgs/personNumExplain.jpg" alt="" />
+							<input id="close" type="button" value="好的，我明白了！"/>
+						</div>
+					</div>
+					
 				</div>
 				<div class="clearfix calculator_item">
-					<label class="fl" for="">人均每笔消费</label>
-					<label class="fr">元</label>
-					<input class="fr input_box" id="consumption_amount" type="text" placeholder="20" value="20"/>					
+					<input class="fl" type="button" value="人均每笔消费"/>
+					<input class="fr" type="button" value="元"/>
+					<input class="fr input_box" id="consumption_amount" type="text" value="20"/>
+					<a class="info" href="javascript:;">平均每人每笔的消费金额</a>
 				</div>
 				<div class="clearfix calculator_item">
-					<label class="fl" for="">人均消费笔数</label>
-					<label class="fr">笔</label>
-					<input class="fr input_box" id="consumption_figures" type="text" placeholder="1" value="1"/>						
+					<input class="fl" type="button" value="人均消费笔数"/>
+					<input class="fr" type="button" value="笔"/>
+					<input class="fr input_box" id="consumption_figures" type="text" value="1"/>
+					<a class="info" href="javascript:;">平均每人的消费笔数</a>
+				</div>	
+				<input type="button" class="error" id="error" value="请确保输入的是正整数!"/>
+				<input type="button" class="calulator_btn" id="calulator_btn" value="计算收入"/>
+			</div>
+			
+			
+			<div class="calculation_result">
+				<div class="result">
+					<h2>您的收入</h2>
+					<em id="gross_income">270</em>
+					<span>元</span>
+					<!--<img src="imgs/jiantou.gif" alt="" />
+					<img src="imgs/jiantou.gif" alt="" />
+					<img src="imgs/jiantou.gif" alt="" />-->
+					<!--<img src="imgs/jiantou.gif" alt="" />-->
+					<!--<img src="imgs/jiantou.gif" alt="" />-->
+					<!--<img src="imgs/jiantou1.gif" alt="" />-->
+					<a href="javascript:;" id="goToShoppingMall">点击文字进入商城</a>
 				</div>
-				<strong class="error1" id="error1">请确保输入框输入的是正整数</strong>
-				<div class="calculation_btn_wrap" id="calculationBtnWrap">
-					<input class="calculation_btn" id="calculation_btn" type="button" value="计算收入"/>
-				</div>
-				<!--<strong class="error2">格式错误，无法计算</strong>-->
-				<div class="calculation_result" id="calculationResult">
-					<span class="gross_income" id="gross_income">270</span>
-					<label>您的收入(单位：元/RMB)</label>
-					<!--<span>元</span>-->
-				</div>					
 			</div>
 		</div>
-	</body>
-	<script>
-		window.onload = function(){
-			var _h = document.documentElement.clientHeight;
-			if(_h == 480){
-				document.getElementById('header').style.height = '140px';
-				document.getElementById('calculationResult').style.paddingTop = '48px';
-			}
-			if(_h == 568){
-				document.getElementById('calculationResult').style.height = '150px';
-				document.getElementById('calculationResult').style.paddingTop = '65px';
-			}	
-			if(_h == 640){
-				document.getElementById('calculationResult').style.height = '155px';
-				document.getElementById('calculationResult').style.paddingTop = '65px';
-			}			
-			if(_h == 667){
-				document.getElementById('header').style.height = '170px';
-				document.getElementById('calculationResult').style.height = '150px';
-				document.getElementById('calculationResult').style.paddingTop = '65px';
-				var aAalculatorItem = document.getElementsByClassName('calculator_item');
-				var aInputBox = document.getElementsByClassName('input_box');
-				for(var i = 0;i<aAalculatorItem.length;i++){
-					aAalculatorItem[i].style.lineHeight = '78px';
-					aInputBox[i].style.height = '78px';
-					aInputBox[i].style.lineHeight = '78px';
+		<script>
+			window.onload = function(){
+				var _h = document.documentElement.clientHeight;
+				var oCalulator = document.getElementById('calulator');
+				if(_h == 480){
+					oCalulator.style.height = '480px';
+				}else if(_h == 640){
+					oCalulator.style.height = '640px';
+				}else if(_h == 731){
+					oCalulator.style.height = '731px';
+				}else if(_h == 823){
+					oCalulator.style.height = '823px';
 				}
-			}	
-			
-			
-			
-//			if(_h == 720){
-//				document.getElementById('calculationResult').style.height = '215px';
-//				document.getElementById('calculationResult').style.paddingTop = '95px';
-//			}
-//			if(_h == 731){
-//				document.getElementById('calculationResult').style.height = '215px';
-//				document.getElementById('calculationResult').style.paddingTop = '95px';
-//			}			
-//			if(_h == 740){
-//				document.getElementById('calculationResult').style.height = '215px';
-//				document.getElementById('calculationResult').style.paddingTop = '95px';
-//			}			
-//			if(_h == 853){
-//				document.getElementById('calculationResult').style.height = '215px';
-//				document.getElementById('calculationResult').style.paddingTop = '95px';
-//			}			
-			
-			
-			if(_h == 731){
-				document.getElementById('calculationResult').style.height = '215px';
-				document.getElementById('calculationResult').style.paddingTop = '95px';
-			}
-			if(_h == 736){
-				document.getElementById('calculation_btn').style.height = '45px';
-			}			
-			if(_h == 812){
-				document.getElementById('calculationBtnWrap').style.padding = '48px 0';
-
-			}			
-			if(_h == 823){
-				document.getElementById('calculationBtnWrap').style.padding = '40px 0';
-				document.getElementById('calculation_btn').style.height = '60px';
-				document.getElementById('calculationResult').style.height = '215px';
-				document.getElementById('calculationResult').style.paddingTop = '95px';
-				var aAalculatorItem = document.getElementsByClassName('calculator_item');
-				var aInputBox = document.getElementsByClassName('input_box');
-				for(var i = 0;i<aAalculatorItem.length;i++){
-					aAalculatorItem[i].style.lineHeight = '70px';
-					aInputBox[i].style.height = '70px';
-					aInputBox[i].style.lineHeight = '70px';
-				}				
-			}	
-			if(_h == 1024){
-				document.getElementById('header').style.height = '325px';
-				document.getElementById('calculationResult').style.paddingTop = '18%';
-			}			
-			if(_h == 1366){
-				document.getElementById('header').style.height = '435px';
-				document.getElementById('calculationResult').style.paddingTop = '18%';
-			}	
-			
-			
-			var aInputBox = document.getElementsByClassName('input_box');
-			for(var i = 0;i<aInputBox.length;i++){
-				aInputBox[i].onkeyup = function(){
-					var _num = this.value;
-					if(_num != '' && !(/^[+]{0,1}(\d+)$/.test(_num))){
-						document.getElementById('error1').style.display = 'block';
-					}else{
-						document.getElementById('error1').style.display = 'none';
-					}					
-				}
-			}
-			
-			document.getElementById('calculation_btn').onclick = function(){
-				var toggle = true;
+				oCalulator.style.height = _h + 'px';
 				
-				var aInputBox = document.getElementsByClassName('input_box');
-				for(var i = 0;i<aInputBox.length;i++){
-					aInputBox[i].onclick = function(){
-						var _num = this.value;
+				var oPersonNum = document.getElementById('person_num');
+				var oConsumptionAmount = document.getElementById('consumption_amount');
+				var oConsumptionFigures = document.getElementById('consumption_figures');
+				
+				document.getElementById('toSeeWhatPersonNum').onclick = function(){
+					document.getElementById('personNumInfoText').style.display = 'flex';
+				}
+				document.getElementById('close').onclick = function(){
+					document.getElementById('personNumInfoText').style.display = 'none';
+				}
+
+				document.getElementById('calulator_btn').onclick = function(){//点击按钮计算
+					var toggle = true;
+					
+					var aInputBox = document.getElementsByClassName('input_box');
+					
+					for(var i = 0;i<aInputBox.length;i++){
+						var _num = aInputBox[i].value;
 						if(_num != '' && !(/^[+]{0,1}(\d+)$/.test(_num))){
 							toggle = false;
-						}					
+						}	
+					}				
+					
+					if(toggle){
+						document.getElementById('error').style.display = 'none';
+						
+						var bPersonNum = oPersonNum.value;
+						var cPersonNum = bPersonNum*bPersonNum;
+						var dPersonNum = bPersonNum*bPersonNum*bPersonNum;	
+						
+						var bConsumptionAmount = Number(oConsumptionAmount.value);//b级人均每笔消费
+						var bConsumptionFigures = Number(oConsumptionFigures.value);//b级人均消费笔数					
+						
+						
+						var totalNumber = bPersonNum + cPersonNum + dPersonNum;
+						var grossIncome = dPersonNum*bConsumptionAmount*bConsumptionFigures*1/100 + cPersonNum*bConsumptionAmount*bConsumptionFigures*3/100 + bPersonNum*bConsumptionAmount*bConsumptionFigures*5/100;					
+						
+						if(grossIncome > 999999999){
+							grossIncome = '10亿+'
+						}
+						
+						document.getElementById('gross_income').innerHTML = grossIncome;
+						
+					}else{
+						document.getElementById('error').style.display = 'block';
 					}
 				}				
 				
-				if(toggle){
-					
-					var bPersonNum = document.getElementById('person_num').value;
-					var cPersonNum = bPersonNum*bPersonNum;
-					var dPersonNum = bPersonNum*bPersonNum*bPersonNum;	
-					
-					var bConsumptionAmount = Number(document.getElementById('consumption_amount').value);//b级人均每笔消费
-					var bConsumptionFigures = Number(document.getElementById('consumption_figures').value);//b级人均消费笔数					
-					
-					
-					var totalNumber = bPersonNum + cPersonNum + dPersonNum;
-					var grossIncome = dPersonNum*bConsumptionAmount*bConsumptionFigures*1/100 + cPersonNum*bConsumptionAmount*bConsumptionFigures*3/100 + bPersonNum*bConsumptionAmount*bConsumptionFigures*5/100;					
-					
-					if(grossIncome > 999999999){
-						grossIncome = '10亿+'
-					}
-					
-					document.getElementById('gross_income').innerHTML = grossIncome;
-					
-				}
+
 			}
-		}		
-	</script>
+		</script>
+	</body>
 </html>
