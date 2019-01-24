@@ -316,18 +316,14 @@
 		</div>
 		<script>
 			window.onload = function(){
+				var _w = document.documentElement.clientWidth;
 				var _h = document.documentElement.clientHeight;
 				var oCalulator = document.getElementById('calulator');
-				if(_h == 480){
-					oCalulator.style.height = '480px';
-				}else if(_h == 640){
-					oCalulator.style.height = '640px';
-				}else if(_h == 731){
-					oCalulator.style.height = '731px';
-				}else if(_h == 823){
-					oCalulator.style.height = '823px';
+				if(_w >= 1024){
+					oCalulator.style.height = '812px';
+				}else{
+					oCalulator.style.height = _h + 'px';	
 				}
-				oCalulator.style.height = _h + 'px';
 				
 				var oPersonNum = document.getElementById('person_num');
 				var oConsumptionAmount = document.getElementById('consumption_amount');
