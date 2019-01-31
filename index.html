@@ -518,10 +518,12 @@
 					setTimeout(function(){
 						document.getElementById('popup').style.transform = 'scale(1.0)';
 					},200);
+					return false;
 				};
 				document.getElementById('close').onclick = function(){
 					document.getElementById('tips_popup').style.display = 'none';
 					document.getElementById('popup').style.transform = 'scale(0.000001)';
+					return false;
 				};
 				aInputBox[0].onkeyup = function(){
 					var _num = this.value;
