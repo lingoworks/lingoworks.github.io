@@ -576,7 +576,9 @@
 						var consumptionFigures = Number(aInputBox[2].value);//人均消费笔数	
 						
 						var grossIncome = personNum3*consumptionAmount*consumptionFigures*1/100 + personNum2*consumptionAmount*consumptionFigures*3/100 + personNum1*consumptionAmount*consumptionFigures*5/100;
-					
+						if(grossIncome > 999999999){
+							grossIncome = '10亿+';
+						}
 						document.getElementById('result').innerHTML = grossIncome;						
 					}					
 					
