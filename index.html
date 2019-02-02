@@ -283,7 +283,7 @@
 					height: 45px;
 					border:0;
 					font-size: 16px;
-					text-align: right;
+					text-align: left;
 					outline: none;				
 				}
 				.content .form_item .item label{
@@ -415,10 +415,10 @@
 		<div class="wrap" id="wrap">
 			<div class="header" id="header">
 				<h1 id="headerTitle">深度自然计算器</h1>
-				<!--<span>快来看看您的收入吧！</span>-->
-				<span>
+				<span>快来看看您的收入吧！</span>
+				<!--<span>
 					<img src="imgs/img1.png" alt="" />
-				</span>
+				</span>-->
 				
 			</div>
 			<div class="content">
@@ -428,7 +428,7 @@
 						<a id="seeWhatPersonNum" href="javascript:;">("点击查看什么是发展人数？")</a>
 					</label>
 					<div class="item">
-						<input class="input_box" type="text" placeholder="请输入您的发展人数（最低20）"/>
+						<input class="input_box" type="text" placeholder="请输入您的发展人数"/>
 						<label class="item_tips">人</label>
 					</div>
 				</div>
@@ -438,7 +438,7 @@
 						<em>（平均每人每笔的消费）金额）</em>
 					</label>
 					<div class="item">
-						<input class="input_box" type="text" placeholder="请输入您人均每笔消费（最低10）"/>
+						<input class="input_box" type="text" placeholder="请输入您人均每笔消费"/>
 						<label class="item_tips">元</label>
 					</div>
 				</div>
@@ -448,11 +448,11 @@
 						<em>（平均每人的消费笔数）笔数）</em>
 					</label>
 					<div class="item">
-						<input class="input_box" type="text" placeholder="请输入人均消费笔数（最低1）"/>
+						<input class="input_box" type="text" placeholder="请输入人均消费笔数"/>
 						<label class="item_tips">笔</label>
 					</div>
 				</div>	
-				<strong class="error" id="error">请确保输入的值符合输入框提示且为正整数！</strong>
+				<strong class="error" id="error">请确保输入的值为正整数！</strong>
 				<div class="clearfix btns">
 					<input class="fl" id="reset" type="button" value="重置"/>
 					<input class="fr" id="goToResult" type="button" value="计算收入"/>
@@ -460,10 +460,10 @@
 			</div>
 			<div class="footer" id="footer">
 				<span>计算结果 <em id="result">？</em>元 </span>
-				<!--<a href="https://www.rzjchina.com/">点击进入商城</a>-->
-				<a id="goToShoppingMall" href="https://www.rzjchina.com/">
+				<a href="https://www.rzjchina.com/">点击进入商城</a>
+				<!--<a id="goToShoppingMall" href="https://www.rzjchina.com/">
 					<img src="imgs/img2.png" alt="" />
-				</a>
+				</a>-->
 			</div>	
 			<div class="tips_popup" id="tips_popup">
 				<div class="popup" id="popup">
@@ -528,7 +528,7 @@
 				aInputBox[0].onkeyup = function(){
 					var _num = this.value;
 					if(_num != ''){
-						if( !(/^[+]{0,1}(\d+)$/.test(_num)) || _num < 20){
+						if( !(/^[+]{0,1}(\d+)$/.test(_num))){
 							oError.style.display = 'block';
 						}else{
 							oError.style.display = 'none';
@@ -540,7 +540,7 @@
 				aInputBox[1].onkeyup = function(){
 					var _num = this.value;
 					if(_num != ''){
-						if( !(/^[+]{0,1}(\d+)$/.test(_num)) || _num < 10){
+						if( !(/^[+]{0,1}(\d+)$/.test(_num))){
 							oError.style.display = 'block';
 						}else{
 							oError.style.display = 'none';
@@ -552,7 +552,7 @@
 				aInputBox[2].onkeyup = function(){
 					var _num = this.value;
 					if(_num != ''){
-						if( !(/^[+]{0,1}(\d+)$/.test(_num)) || _num < 1){
+						if( !(/^[+]{0,1}(\d+)$/.test(_num))){
 							oError.style.display = 'block';
 						}else{
 							oError.style.display = 'none';
@@ -562,8 +562,16 @@
 					}
 				};
 				
+				document.getElementById('reset').onclick = function(){
+					for(var i = 0;i<aInputBox.length;i++){
+						aInputBox[i].value = '';
+					}
+					oError.style.display = 'none';
+					document.getElementById('result').innerHTML = '？';	
+				};
+				
 				document.getElementById('goToResult').onclick = function(){
-					if( (!(/^[+]{0,1}(\d+)$/.test(aInputBox[0].value)) || (aInputBox[0].value) < 20) || (!(/^[+]{0,1}(\d+)$/.test(aInputBox[1].value)) || (aInputBox[1].value) < 10) || (!(/^[+]{0,1}(\d+)$/.test(aInputBox[2].value)) || (aInputBox[2].value) < 1)){
+					if( !(/^[+]{0,1}(\d+)$/.test(aInputBox[0].value)) || !(/^[+]{0,1}(\d+)$/.test(aInputBox[1].value)) || !(/^[+]{0,1}(\d+)$/.test(aInputBox[2].value))){
 						oError.style.display = 'block';
 						document.getElementById('result').innerHTML = '？';	
 					}else{
